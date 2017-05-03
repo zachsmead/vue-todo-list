@@ -1,0 +1,54 @@
+<!-- 
+	In the code below, the first snippet will work, then the second will not.
+	If you switch them around, it still holds true. Why?
+	I think it has to do with addEventListener, which can be found in home.js
+-->
+
+
+<div id="app">
+	Task name: <input v-model="textFilter"></input><br/><br/>
+
+	<button v-for="status in statuses" v-on:click="filterTasks(status)">{{ status }}</button><br /><br />
+
+	<transition-group name="fade">
+		<div v-for="task in tasks" v-bind:key="task.text" v-if="isValidTask(task)" v-on:click="finishTask(task)" v-bind:class="{strike: task.completed}">
+
+			<p>
+				{{ task["text"] }}
+			</p>
+
+		</div>
+	</transition-group>
+
+	<input type="text" v-model="newText">
+	<button v-on:click="addTask()">Add Task</button><br /><br />
+	<div>Tasks left: {{ incompleteTasks() }}</div><br/>
+	<button v-on:click="deleteCompleted(tasks)">Delete completed</button>
+</div>
+
+
+
+
+
+
+<!--
+	vv This code below will not work vv 
+-->
+
+<!-- <div id="app">
+	<input type="text" v-for="task in tasks" v-model="task">
+	<p v-for="task in tasks">{{ task }}</p>
+</div> -->
+
+<!-- <div id="app">
+	<div>
+		{{ tasks[0] }}
+	</div>
+	<div>
+		{{ tasks[1] }}
+	</div>
+	<div>
+		{{ tasks[2] }}
+	</div>
+	<input type="text" v-model="tasks[2]">
+</div> -->
